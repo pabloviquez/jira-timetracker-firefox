@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jira Time Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- 1. Pick a ticket -->
+  <section class="view" id="view-picker" hidden>
+    <header class="bar">
+      <h1>Track time</h1>
+      <button class="icon-btn" id="open-settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" style="stroke-width:1.9" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </header>
+
+    <div id="picker-ready">
+      <label class="field">
+        <span class="label">Project</span>
+        <span class="select-wrap">
+          <select id="project"></select>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg>
+        </span>
+      </label>
+
+      <label class="search">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg>
+        <input id="search" type="search" placeholder="Search my tickets" autocomplete="off" aria-label="Search my tickets">
+      </label>
+
+      <div class="label list-label">Assigned to me</div>
+      <div class="list" id="issues" role="radiogroup" aria-label="Tickets assigned to me"></div>
+
+      <button class="btn primary" id="start" disabled>Start Clock</button>
+    </div>
+
+    <div id="picker-setup" class="empty" hidden>
+      <div class="empty-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>
+      </div>
+      <h2>Connect to uHub</h2>
+      <p>Add your uHub personal token to see the tickets assigned to you.</p>
+      <button class="btn primary" id="setup-settings">Open Settings</button>
+    </div>
+  </section>
+
+  <!-- 2. Clock running -->
+  <section class="view" id="view-running" hidden>
+    <header class="bar">
+      <h1><span class="live-dot" aria-hidden="true"></span>Clock running</h1>
+    </header>
+    <div class="clock" id="clock" role="timer" aria-live="off">00:00:00</div>
+    <div class="clock-sub" id="started-at"></div>
+    <div class="card" id="running-card"></div>
+    <button class="btn stop" id="stop">Stop Clock</button>
+  </section>
+
+  <!-- 3. Confirm the time -->
+  <section class="view" id="view-confirm" hidden>
+    <header class="bar">
+      <h1>Log this time?</h1>
+    </header>
+    <div class="card" id="confirm-card"></div>
+
+    <div class="time-edit" role="group" aria-label="Time to log">
+      <div class="stepper">
+        <button class="step" data-step="-60" aria-label="One hour less">−</button>
+        <label><input id="hours" inputmode="numeric" maxlength="2" aria-label="Hours"><span>hr</span></label>
+        <button class="step" data-step="60" aria-label="One hour more">+</button>
+      </div>
+      <div class="stepper">
+        <button class="step" data-step="-1" aria-label="One minute less">−</button>
+        <label><input id="minutes" inputmode="numeric" maxlength="2" aria-label="Minutes"><span>min</span></label>
+        <button class="step" data-step="1" aria-label="One minute more">+</button>
+      </div>
+    </div>
+    <div class="measured">
+      <span id="measured"></span>
+      <button class="link" id="reset-time" hidden>Reset</button>
+    </div>
+
+    <label class="field">
+      <span class="label">Work description <em>optional</em></span>
+      <textarea id="comment" rows="2" placeholder="What did you work on?"></textarea>
+    </label>
+
+    <p class="error" id="confirm-error" role="alert" hidden></p>
+
+    <button class="btn primary" id="update">Update Jira</button>
+    <div class="btn-row">
+      <button class="btn secondary" id="resume">Resume Work</button>
+      <button class="btn plain danger" id="cancel">Cancel</button>
+    </div>
+  </section>
+
+  <!-- 4. Logged -->
+  <section class="view" id="view-done" hidden>
+    <div class="done">
+      <div class="done-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="m6.5 12.5 3.6 3.6 7.4-8"/></svg>
+      </div>
+      <h2 id="done-title"></h2>
+      <p id="done-sub"></p>
+      <a class="link" id="done-link" target="_blank" rel="noopener">See in JIRA<span aria-hidden="true"> ↗</span></a>
+    </div>
+    <button class="btn secondary" id="done-ok">Done</button>
+  </section>
+
+  <!-- Settings -->
+  <section class="view" id="view-settings" hidden>
+    <header class="bar">
+      <button class="icon-btn" id="settings-back" aria-label="Back">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 4.5 6.5 10l5.5 5.5"/></svg>
+      </button>
+      <h1>Settings</h1>
+    </header>
+
+    <label class="field">
+      <span class="label">uHub personal token</span>
+      <span class="token-wrap">
+        <input id="token" type="password" autocomplete="off" spellcheck="false">
+        <button class="link" id="toggle-token" type="button">Show</button>
+      </span>
+      <span class="hint"><span id="token-hint">Kept encrypted in this browser. It is only sent to uHub.</span>
+        <button class="link danger-link" id="remove-token" type="button" hidden>Remove token</button></span>
+    </label>
+
+    <label class="field">
+      <span class="label">Default project</span>
+      <span class="select-wrap">
+        <select id="default-project"></select>
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5l3-3"/></svg>
+      </span>
+      <span class="hint">Selected for you each time you start a clock.</span>
+    </label>
+
+    <p class="notice" id="settings-status" role="status" hidden></p>
+    <p class="error" id="settings-error" role="alert" hidden></p>
+
+    <button class="btn primary" id="save-settings">Save</button>
+
+    <footer class="credit">Develop by <a href="https://www.linkedin.com/in/pabloviquez/" target="_blank" rel="noopener">Pablo Viquez</a> · <a href="https://www.paypal.com/donate/?business=ZR66BRGL7XS6N&amp;no_recurring=0&amp;item_name=Like+what+I%27m+building%3F+Help+me+keep+the+ideas+flowing.+Your+support+helps+me+keep+working+on+these+projects.&amp;currency_code=USD" target="_blank" rel="noopener">Support my work, buy me a coffee</a></footer>
+  </section>
+
+</main>
+<template id="check-icon"><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.5 3 3 6-6.5"/></svg></template>
+<script src="../lib/api.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
