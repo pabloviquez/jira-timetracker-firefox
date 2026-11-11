@@ -2,6 +2,10 @@
 
 A Firefox extension that times the Jira ticket you are working on and logs that time to the ticket when you stop.
 
+## Looking for other browsers?
+
+- [Jira Time Tracker for Chrome](https://github.com/pabloviquez/jira-timetracker-chrome)
+
 ## What it does
 
 1. Click the stopwatch in the toolbar, choose a project and pick one of the tickets assigned to you.

@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "description": "Time the Jira ticket you are working on and log it to the ticket when you stop.",
   "icons": {
-    "16": "icons/running-16.png",
-    "32": "icons/running-32.png",
-    "48": "icons/running-48.png",
-    "128": "icons/running-128.png"
+    "16": "icons/logo-16.png",
+    "32": "icons/logo-32.png",
+    "48": "icons/logo-48.png",
+    "96": "icons/logo-96.png",
+    "128": "icons/logo-128.png"
   },
   "action": {
     "default_title": "Jira Time Tracker",
@@ -34,7 +35,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "jira-time-tracker@uhub.local",
-      "strict_min_version": "115.0",
+      "strict_min_version": "142.0",
       "data_collection_permissions": {
         "required": [
           "none"
