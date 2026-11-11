@@ -53,10 +53,9 @@ _Screenshots will be added here._
 
 ## Change log
 
-No public release yet.
-
 | Date | Version | Description |
 | --- | --- | --- |
+| 2026-11-11 | 1.0.0 | First public release. Submitted to [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/jira-time-tracker1/). |
 
 ## Security
 
