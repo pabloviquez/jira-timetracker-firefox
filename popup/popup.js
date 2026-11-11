@@ -42,7 +42,7 @@ function formatDuration(minutes) {
 }
 
 function jiraLink(issueKey) {
-  const a = el('a', 'link', 'See in JIRA');
+  const a = el('a', 'link', 'See in Jira');
   a.href = Api.issueUrl(issueKey);
   a.target = '_blank';
   a.rel = 'noopener';

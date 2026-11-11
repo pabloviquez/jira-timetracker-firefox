@@ -16,7 +16,7 @@ A Firefox extension that times the Jira ticket you are working on and logs that 
    - **Resume Work** continues the clock from where it stopped.
    - **Cancel** discards the time and changes nothing in Jira.
 
-Every ticket has a **See in JIRA** link that opens it in a new tab. The settings screen holds your uHub personal token and your default project.
+Every ticket has a **See in Jira** link that opens it in a new tab. The settings screen holds your uHub personal token and your default project.
 
 The extension works with the Jira instance at `https://jira.uhub.biz`.
 
@@ -66,5 +66,6 @@ Both the encrypted token and its key live inside your browser profile on your co
 
 ## Roadmap
 
+- **Support for all Jira instances.** Today the extension only works with `https://jira.uhub.biz`. The plan is to let you enter the address of any Jira instance, so it can be used outside uHub.
 - **Private and incognito windows.** Tracking time from a private or incognito window has not been built or tested yet.
 - **Sharing a session between window types.** A clock started in a standard window is not yet shared with private or incognito windows, or the other way round.
