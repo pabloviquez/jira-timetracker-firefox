@@ -57,7 +57,17 @@ Or scan the QR code:
 
 ## Preview
 
-_Screenshots will be added here._
+Pick a project and one of the tickets assigned to you:
+
+![Ticket list with a ticket selected and the Start Clock button](assets/1-tickets-1280x800.png)
+
+The clock while you work:
+
+![Running clock showing the elapsed time and the ticket](assets/2-clock-1280x800.png)
+
+Review the time and log it to Jira:
+
+![Measured time with the Update Jira, Resume Work and Cancel buttons](assets/3-logtime-1280x800.png)
 
 ## Change log
 
