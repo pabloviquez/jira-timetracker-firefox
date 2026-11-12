@@ -20,6 +20,14 @@ Every ticket has a **See in Jira** link that opens it in a new tab. The settings
 
 The extension works with the Jira instance at `https://jira.uhub.biz`.
 
+## Personal Token
+
+The extension requires your uHub personal token to authenticate with the Jira instance.
+
+To obtain your uHub personal token, log in to your uHub account, navigate to your profile settings, and generate a new token. Copy this token and paste it into the settings screen of the extension.
+
+To generate a new personal token, visit your uHub profile settings at https://jira.uhub.biz/secure/ViewProfile.jspa
+
 ## Donations
 
 Like what I'm building? Help me keep the ideas flowing.
@@ -56,6 +64,8 @@ _Screenshots will be added here._
 | Date | Version | Description |
 | --- | --- | --- |
 | 2026-11-11 | 1.0.0 | First public release. Submitted to [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/jira-time-tracker1/). |
+| 2026-11-12 | 1.0.0 | Submitted to the Chrome Web Store for review. |
+| 2026-11-12 | 1.0.1 | Added Personal Token creation link in the settings screen. |
 
 ## Security
 

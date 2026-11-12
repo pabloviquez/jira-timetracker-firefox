@@ -235,9 +235,10 @@ select:disabled { opacity: 0.55; cursor: default; }
 /* ---------- Settings ---------- */
 
 .credit { text-align: center; color: var(--text-2); font-size: 0.625rem; margin-top: 0.25rem; }
-.credit a { color: var(--accent); text-decoration: none; }
-.credit a:hover { text-decoration: underline; }
-.credit a:active { opacity: 0.6; }
+.credit a, .token-help a { color: var(--accent); text-decoration: none; }
+.credit a:hover, .token-help a:hover { text-decoration: underline; }
+.credit a:active, .token-help a:active { opacity: 0.6; }
+.token-help { margin: 0; font-size: 0.75rem; color: var(--text-2); background: var(--fill); border-radius: 0.625rem; padding: 0.5rem 0.625rem; }
 
 /* ---------- Accessibility ---------- */
 
