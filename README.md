@@ -1,10 +1,10 @@
-# Jira Time Tracker for Firefox
+# Jira Time Tracker for uHub (Firefox)
 
 A Firefox extension that times the Jira ticket you are working on and logs that time to the ticket when you stop.
 
 ## Looking for other browsers?
 
-- [Jira Time Tracker for Chrome](https://github.com/pabloviquez/jira-timetracker-chrome)
+- [Jira Time Tracker for uHub (Chrome)](https://github.com/pabloviquez/jira-timetracker-chrome)
 
 ## What it does
 
@@ -59,7 +59,7 @@ _Screenshots will be added here._
 
 ## Security
 
-Your personal token is checked against Jira before it is saved, and a token Jira rejects is never stored. An accepted token is encrypted with AES-GCM using a 256-bit key that the browser generates as a non-extractable key: the extension can use it to encrypt and decrypt, but no script can read the key itself. Only the encrypted token is written to the extension's local storage, and the key is kept separately in the extension's own database. The token is decrypted in memory only at the moment a request is made, it is sent only to `https://jira.uhub.biz` over HTTPS, and requests never include your browser's Jira session cookies. It is not synced to other devices, the extension has no access to any other website, and it collects no analytics or usage data. You can delete the token and its key at any time with **Remove token** in the settings.
+Your personal token is checked against Jira before it is saved, and a token Jira rejects is never stored. An accepted token is encrypted with AES-GCM using a 256-bit key that the browser generates as a non-extractable key: the extension can use it to encrypt and decrypt, but no script can read the key itself. Only the encrypted token is written to the extension's local storage, and the key is kept separately in the extension's own database. The token is decrypted in memory only at the moment a request is made, it is sent only to `https://jira.uhub.biz` over HTTPS, and requests never include your browser's Jira session cookies. It is not synced to other devices, the extension has no access to any other website, and it collects no analytics or usage data. You can delete the token and its key at any time with **Remove token** in the settings. The full [privacy policy](PRIVACY.md) explains every permission.
 
 Both the encrypted token and its key live inside your browser profile on your computer. This protects the token from being read out of the extension's storage, but not from someone who has full access to your browser profile, so treat the computer's own login and disk encryption as part of the protection.
 

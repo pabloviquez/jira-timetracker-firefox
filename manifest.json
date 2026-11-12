@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Jira Time Tracker",
+  "name": "Jira Time Tracker for uHub",
   "version": "1.0.0",
   "description": "Time the Jira ticket you are working on and log it to the ticket when you stop.",
   "icons": {
@@ -11,7 +11,7 @@
     "128": "icons/logo-128.png"
   },
   "action": {
-    "default_title": "Jira Time Tracker",
+    "default_title": "Jira Time Tracker for uHub",
     "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "icons/idle-16.png",

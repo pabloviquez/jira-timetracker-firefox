@@ -39,7 +39,7 @@ async function paint() {
         ? `Clock running · ${timer.issue.key}`
         : state === 'stopped'
           ? `Time waiting to be logged · ${timer.issue.key}`
-          : 'Jira Time Tracker',
+          : 'Jira Time Tracker for uHub',
   });
 
   // The badge shows minutes, so one repaint a minute is enough; alarms survive the worker being suspended.
